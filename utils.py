@@ -13,7 +13,7 @@ def imread(path, image_res=[128, 128]):
     Returns:
         A normalized and resized image
     """
-    img = plt.imread(path, format='RGB').astype(np.float)
+    img = plt.imread(path, format='RGB').astype(float)
     img = tf.image.resize(img, image_res).numpy()
 
     img = img/127.5 - 1.
@@ -51,7 +51,7 @@ def get_samples(path,
     return np.array(imgs)
 
 
-def batch_generator(path,
+def batch_generator(path = './datasets/apple2orange',
                     batch_size=1,
                     image_res=[128, 128],
                     is_testing=False):
@@ -83,6 +83,8 @@ def batch_generator(path,
         batch_B = path_B[i*batch_size:(i+1)*batch_size]
         imgs_A, imgs_B = [], []
         for img_A, img_B in zip(batch_A, batch_B):
+            print(f'path to the img_A: {img_A}')
+            print(f'path to the img_B: {img_B}')
             img_A = imread(img_A, image_res)
             img_B = imread(img_B, image_res)
 
@@ -97,8 +99,8 @@ def batch_generator(path,
         imgs_B = np.array(imgs_B)
 
         yield imgs_A, imgs_B
-
-
+        
+          
 def plot_sample_images(gen_AtoB,
                        gen_BtoA,
                        path,
