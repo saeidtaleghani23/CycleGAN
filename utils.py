@@ -65,9 +65,12 @@ def batch_generator(path = './datasets/apple2orange',
     Returns:
         yields a tuple of two lists (source,target)
     """
+    print(f'path in batch_generator: {path}')
     data_type = "train" if not is_testing else "test"
     path_A = glob('{}/{}A/*'.format(path, data_type))
+    print(f'path_A: {path_A}')
     path_B = glob('{}/{}B/*'.format(path, data_type))
+    print(f'path_B: {path_B}')
 
     num_batches = int(min(len(path_A), len(path_B)) / batch_size)
     num_samples = num_batches * batch_size
@@ -133,7 +136,7 @@ def plot_sample_images(gen_AtoB,
 
     # scale images 0 - 1
     gen_imgs = 0.5 * gen_imgs + 0.5
-
+    print(f'output_dir in plot_sample_images function is: {output_dir}')
     os.makedirs(output_dir, exist_ok=True)
     titles = ['Original', 'Translated', 'Reconstructed']
 
