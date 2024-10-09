@@ -67,9 +67,7 @@ def batch_generator(path = './datasets/apple2orange',
     """
     data_type = "train" if not is_testing else "test"
     path_A = glob('{}/{}A/*'.format(path, data_type))
-    print(f' path to domain A dataset: {path_A}')
     path_B = glob('{}/{}B/*'.format(path, data_type))
-    print(f' path to domain B dataset: {path_B}')
 
     num_batches = int(min(len(path_A), len(path_B)) / batch_size)
     num_samples = num_batches * batch_size
@@ -83,8 +81,6 @@ def batch_generator(path = './datasets/apple2orange',
         batch_B = path_B[i*batch_size:(i+1)*batch_size]
         imgs_A, imgs_B = [], []
         for img_A, img_B in zip(batch_A, batch_B):
-            print(f'path to the img_A: {img_A}')
-            print(f'path to the img_B: {img_B}')
             img_A = imread(img_A, image_res)
             img_B = imread(img_B, image_res)
 
@@ -150,6 +146,6 @@ def plot_sample_images(gen_AtoB,
           axs[i, j].set_title(titles[j])
           axs[i,j].axis('off')
           cnt += 1
-    fig.savefig("{}/{}_{}.png".format(output_dir, epoch, batch_num))
+    fig.savefig("{}/epoch{}_batch_num{}.png".format(output_dir, epoch, batch_num))
     plt.show()
     plt.close()
