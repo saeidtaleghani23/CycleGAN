@@ -164,4 +164,4 @@ cython_debug/
 datasets/
 outputs/
 datasets_vangogh2photo/
-outputs_datasets_vangogh2photo/
+outputs_vangogh2photo/
